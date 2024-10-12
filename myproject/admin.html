@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <main>
+        <h2>Manage Bookings</h2>
+        <div id="bookingList"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hotel Management System</p>
+    </footer>
+
+    <script>
+        // Retrieve bookings from local storage
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        const bookingList = document.getElementById('bookingList');
+
+        // Display each booking
+        if (bookings.length > 0) {
+            bookings.forEach(booking => {
+                const bookingInfo = document.createElement('div');
+                bookingInfo.innerHTML = `<strong>Name:</strong> ${booking.name}<br>
+                                          <strong>Check-in:</strong> ${booking.checkIn}<br>
+                                          <strong>Check-out:</strong> ${booking.checkOut}<br>
+                                          <strong>Room Type:</strong> ${booking.roomType}<br>
+                                          <strong>Room Condition:</strong> ${booking.roomCondition}<br>
+                                          <strong>Contact Number:</strong> ${booking.contactNumber}<br>
+                                          <strong>Charges:</strong> ₹${booking.charges}<br><br>`;
+                bookingList.appendChild(bookingInfo);
+            });
+        } else {
+            bookingList.innerHTML = 'No bookings found.';
+        }
+    </script>
+</body>
+</html>
